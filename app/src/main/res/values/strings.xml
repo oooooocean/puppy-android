@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">宠物星球</string>
+    <string name="login_phone_hint">铲屎的, 手机号填在这里👇🏻</string>
+    <string name="login_code_hint">验证码填在这里👇🏻</string>
+    <string name="login_code">获取验证码</string>
+    <string name="login">进入星球</string>
+    <string name="login_protocol">同意用户协议和隐私政策</string>
+    <string name="login_third_tip">其他进入星球的方式👇🏻</string>
+</resources>
