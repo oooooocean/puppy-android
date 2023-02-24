@@ -1,12 +1,7 @@
-package tools
+package com.example.puppy_android.tools
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.ToNumberStrategy
-import com.google.gson.internal.bind.NumberTypeAdapter
-import com.google.gson.internal.bind.ObjectTypeAdapter
-import com.google.gson.stream.JsonReader
-import com.google.gson.stream.JsonToken
 
 
 object GsonHelper {

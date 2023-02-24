@@ -1,6 +1,6 @@
-package net
+package com.example.puppy_android.net
 
-import models.Pandora
+import com.example.puppy_android.models.Pandora
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded

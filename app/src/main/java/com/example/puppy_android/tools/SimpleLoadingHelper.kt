@@ -1,4 +1,4 @@
-package tools
+package com.example.puppy_android.tools
 
 import android.app.Dialog
 import android.content.Context

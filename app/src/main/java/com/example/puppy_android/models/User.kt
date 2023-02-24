@@ -1,4 +1,4 @@
-package models
+package com.example.puppy_android.models
 
 import com.google.gson.annotations.SerializedName
 
