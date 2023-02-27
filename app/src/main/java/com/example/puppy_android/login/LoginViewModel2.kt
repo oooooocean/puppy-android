@@ -15,12 +15,13 @@ import kotlinx.coroutines.flow.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.awaitResponse
 import java.util.*
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class LoginViewModel2: ViewModel() {
+class LoginViewModel2 : ViewModel() {
     lateinit var loginEnableFlow: Flow<Boolean>
     lateinit var codeEnableFlow: Flow<Boolean>
     var codeCounterFlow = MutableStateFlow(DEFAULT_CODE_TIP)
@@ -43,25 +44,11 @@ class LoginViewModel2: ViewModel() {
     /**
      * 登录
      */
-    suspend fun login(): LoginUser =
-        suspendCoroutine { continuation ->
-            val callback = object : Callback<LoginResult> {
-                override fun onResponse(call: Call<LoginResult>, response: Response<LoginResult>) {
-                    response.body()?.data?.let {
-                        it["token"].let { token -> com.example.puppy_android.services.Store.Token.set(token) } // 保存 token
-                        val user = Gson().run {
-                            fromJson(this.toJson(it["user"]), LoginUser::class.java)
-                        }
-                        continuation.resume(user)
-                    }
-                }
-
-                override fun onFailure(call: Call<Pandora<Map<String, Any>>>, t: Throwable) {
-                    continuation.resumeWithException(t)
-                }
-            }
-
-            Net.create<LoginService>().login("18856931381", "123456").enqueue(callback)
+    suspend fun login(): LoginUser? =
+        Net.create<LoginService>().login("18856931381", "123456").awaitResponse().body()?.data?.run {
+            this["token"].let { token -> com.example.puppy_android.services.Store.Token.set(token) } // 保存 token
+            val gson = Gson()
+            gson.fromJson(gson.toJson(this["user"]), LoginUser::class.java)
         }
 
     /**
