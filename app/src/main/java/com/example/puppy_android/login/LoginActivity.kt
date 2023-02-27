@@ -5,8 +5,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.puppy_android.R
 import com.example.puppy_android.databinding.ActivityLoginBinding
 import com.example.puppy_android.extensions.textFlow
@@ -17,6 +20,7 @@ import com.example.puppy_android.tools.Module
 import com.example.puppy_android.tools.SimpleLoadingHelper
 import com.example.puppy_android.tools.d
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 typealias LoginResult = Pandora<Map<String, Any>>
 
@@ -35,6 +39,8 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
             code = binding.codeEditText.textFlow,
             protocol = binding.protocolButton.valueFlow
         )
+
+
 
         lifecycleScope.launch {
             launch {
@@ -57,7 +63,7 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
 
             launch {
                 // 验证码文案
-                viewModel.codeCounterFlow.collect {
+                viewModel.codeCounterFlow.flowWithLifecycle(lifecycle).collect {
                     binding.codeButton.text = it
                 }
             }
