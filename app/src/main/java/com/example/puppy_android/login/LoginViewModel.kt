@@ -1,7 +1,5 @@
 package com.example.puppy_android.login
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -25,7 +23,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-typealias LoginResult = Pandora<Map<String, Any>>
 
 class LoginViewModel : ViewModel() {
     inner class Data(
