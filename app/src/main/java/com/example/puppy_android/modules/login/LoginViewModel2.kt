@@ -1,4 +1,4 @@
-package com.example.puppy_android.login
+package com.example.puppy_android.modules.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,6 +6,7 @@ import com.example.puppy_android.models.LoginUser
 import com.example.puppy_android.models.Pandora
 import com.example.puppy_android.net.LoginService
 import com.example.puppy_android.net.Net
+import com.example.puppy_android.services.Store
 import com.example.puppy_android.services.set
 import com.example.puppy_android.tools.Module
 import com.example.puppy_android.tools.d
@@ -48,7 +49,9 @@ class LoginViewModel2 : ViewModel() {
         Net.create<LoginService>().login("18856931381", "123456").awaitResponse().body()?.data?.run {
             this["token"].let { token -> com.example.puppy_android.services.Store.Token.set(token) } // 保存 token
             val gson = Gson()
-            gson.fromJson(gson.toJson(this["user"]), LoginUser::class.java)
+            val userJson = gson.toJson(this["user"])
+            Store.LoginUser.set(userJson) // 缓存User
+            gson.fromJson(userJson, LoginUser::class.java)
         }
 
     /**

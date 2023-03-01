@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.puppy_android"
-        minSdk 29
+        minSdk 31
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -52,5 +52,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.1"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
-    implementation 'com.github.mrmike:ok2curl:0.8.0'
+    implementation 'com.github.bumptech.glide:glide:4.15.0'                         // 图片处理
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.15.0'
+    implementation 'com.github.mrmike:ok2curl:0.8.0'                                // 请求转CURL
+    implementation 'io.github.lucksiege:pictureselector:v2.7.3-rc10'                // 拍照, 相册
 }

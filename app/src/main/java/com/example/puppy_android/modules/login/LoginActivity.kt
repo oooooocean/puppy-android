@@ -1,6 +1,8 @@
-package com.example.puppy_android.login
+package com.example.puppy_android.modules.login
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +17,12 @@ import com.example.puppy_android.databinding.ActivityLoginBinding
 import com.example.puppy_android.extensions.textFlow
 import com.example.puppy_android.extensions.valueFlow
 import com.example.puppy_android.models.Pandora
+import com.example.puppy_android.modules.user.info.UserEditActivity
 import com.example.puppy_android.tools.Loading
 import com.example.puppy_android.tools.Module
 import com.example.puppy_android.tools.SimpleLoadingHelper
 import com.example.puppy_android.tools.d
+import com.google.gson.Gson
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -39,8 +43,6 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
             code = binding.codeEditText.textFlow,
             protocol = binding.protocolButton.valueFlow
         )
-
-
 
         lifecycleScope.launch {
             launch {
@@ -90,7 +92,10 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
             try {
                 val loginUser = coroutineScope { viewModel.login() }
                 Module.Login.d(loginUser.toString())
-                Toast.makeText(this@LoginActivity, "登录成功", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@LoginActivity, UserEditActivity::class.java).apply {
+                    putExtra("user", Gson().toJson(loginUser))
+                }
+                startActivity(intent)
             } catch (e: Exception) {
                 Module.Login.d(e.toString())
                 Toast.makeText(this@LoginActivity, "登录失败", Toast.LENGTH_SHORT).show()

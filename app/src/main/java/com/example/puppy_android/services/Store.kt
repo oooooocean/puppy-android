@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 
 enum class Store {
-    Token
+    Token,
+    LoginUser
 }
 
 val Store.sp: SharedPreferences

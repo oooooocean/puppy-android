@@ -1,4 +1,4 @@
-package com.example.puppy_android.login
+package com.example.puppy_android.modules.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".modules.user.info.UserEditActivity"
+    android:background="@color/grey_f1f1f1">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/black_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:text="铲屎官信息"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!--avatar-->
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:padding="15dp"
+            android:src="@android:drawable/ic_menu_camera"/>
+
+        <!--nickname-->
+        <EditText
+            android:id="@+id/nickname"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:layout_marginVertical="30dp"
+            android:hint="毛孩子一般喊你啥?"
+            android:autofillHints=""
+            android:importantForAutofill="no"/>
+
+        <!--gender-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp">
+            <ImageView
+                android:id="@+id/man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/circle_border"
+                android:layout_marginRight="40dp"
+                android:src="@drawable/ic_baseline_man_24"/>
+            <ImageView
+                android:id="@+id/woman"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:background="@drawable/circle_border"
+                android:src="@drawable/ic_baseline_woman_24"/>
+        </LinearLayout>
+
+        <!--附加信息-->
+        <EditText
+            android:id="@+id/information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="5"
+            android:gravity="top"
+            android:padding="12dp"
+            android:maxLength="50"
+            android:background="@drawable/rounded_border"
+            android:hint="嘿, 主人, 你不想对我说点啥吗?"
+            android:importantForAutofill="no"/>
+        <TextView
+            android:id="@+id/informationCounter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="end"
+            android:text="0/50"
+            android:textColor="@color/grey_hint"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!--下一步-->
+        <TextView
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:background="@color/grey_border"
+            android:text="下一步"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black_primary"
+            />
+    </LinearLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

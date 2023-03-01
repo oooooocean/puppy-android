@@ -4,11 +4,13 @@ import android.util.Log
 
 enum class Module {
     Login,
+    User,
     Net;
 
     override fun toString(): String =
         when (this) {
             Login -> "\uD83D\uDC68\uD83C\uDFFB登录模块"
+            User -> "👤用户模块"
             Net -> "\uD83C\uDF0F网络模块"
         }
 
