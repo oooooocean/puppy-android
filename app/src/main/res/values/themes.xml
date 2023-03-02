@@ -17,6 +17,7 @@
         <item name="android:colorControlNormal">@color/grey_hint</item>
     </style>
 
+    <!--Loading样式-->
     <style name="dialog_style" parent="Theme.AppCompat.Dialog">
         <!--设置背景颜色-->
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -26,5 +27,12 @@
         <item name="android:windowIsTranslucent">true</item>
         <!--设置是否显示"遮罩"层-->
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <!--编辑框的样式-->
+    <style name="edit_text_style">
+        <item name="android:textColorHint">@color/grey_hint</item>
+        <item name="colorControlNormal">@color/grey_hint</item>
+        <item name="colorControlActivated">@color/orange</item>
     </style>
 </resources>

@@ -1,19 +1,22 @@
 package com.example.puppy_android.modules.login
 
 import android.content.Intent
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Parcelable
+import android.text.SpannableString
+import android.text.SpannableStringBuilder
+import android.text.style.StyleSpan
+import android.text.style.UnderlineSpan
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.*
 import com.example.puppy_android.R
 import com.example.puppy_android.databinding.ActivityLoginBinding
+import com.example.puppy_android.extensions.setCorner
 import com.example.puppy_android.extensions.textFlow
 import com.example.puppy_android.extensions.valueFlow
 import com.example.puppy_android.models.Pandora
@@ -37,6 +40,14 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.loginButton.setCorner(22F)
+        binding.protocol.text = SpannableString("同意用户协议和隐私政策").apply {
+            setSpan(StyleSpan(Typeface.BOLD), 2, 6, 0)
+            setSpan(UnderlineSpan(), 2, 6, 0)
+            setSpan(StyleSpan(Typeface.BOLD), 7, 11, 0)
+            setSpan(UnderlineSpan(), 7, 11, 0)
+        }
+
         viewModel = ViewModelProvider(this)[LoginViewModel2::class.java]
         viewModel.setInput(
             phone = binding.phoneEditText.textFlow,
@@ -44,8 +55,8 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
             protocol = binding.protocolButton.valueFlow
         )
 
-        lifecycleScope.launch {
-            launch {
+        lifecycleScope.launchWhenResumed {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 // 按钮是否可点击
                 viewModel.loginEnableFlow.collect {
                     binding.loginButton.isEnabled = it
@@ -65,7 +76,7 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
 
             launch {
                 // 验证码文案
-                viewModel.codeCounterFlow.flowWithLifecycle(lifecycle).collect {
+                viewModel.codeCounterFlow.collect {
                     binding.codeButton.text = it
                 }
             }
