@@ -7,7 +7,13 @@ enum class Gender {
     @SerializedName(value = "0")
     MALE,
     @SerializedName(value = "1")
-    FEMALE
+    FEMALE;
+
+    val humanString: String
+        get() = if (this == MALE) "男" else "女"
+
+    val puppyString: String
+        get() = if (this == MALE) "男宝" else "女宝"
 }
 
 @VersionedParcelize

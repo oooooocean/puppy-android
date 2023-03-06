@@ -18,9 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Puppyandroid">
         <activity
+            android:label=""
             android:name=".modules.user.info.UserEditActivity"
-            android:exported="true" >
-
+            android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -28,6 +28,7 @@
         <activity
             android:name=".modules.login.LoginActivity"
             android:exported="true" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

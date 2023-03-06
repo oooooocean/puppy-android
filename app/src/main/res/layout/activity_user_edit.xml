@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,6 +37,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
+            android:scaleType="centerCrop"
             android:padding="15dp"
             android:src="@android:drawable/ic_menu_camera"/>
 
@@ -63,14 +65,16 @@
                 android:padding="5dp"
                 android:background="@drawable/circle_border"
                 android:layout_marginRight="40dp"
-                android:src="@drawable/ic_baseline_man_24"/>
+                android:src="@drawable/ic_baseline_man_24"
+                app:tint="@color/grey_hint" />
             <ImageView
                 android:id="@+id/woman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:background="@drawable/circle_border"
-                android:src="@drawable/ic_baseline_woman_24"/>
+                android:src="@drawable/ic_baseline_woman_24"
+                app:tint="@color/grey_hint"/>
         </LinearLayout>
 
         <!--附加信息-->

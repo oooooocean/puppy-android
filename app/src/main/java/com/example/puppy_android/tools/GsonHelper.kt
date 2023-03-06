@@ -9,7 +9,7 @@ object GsonHelper {
         GsonBuilder()
             .setObjectToNumberStrategy { `in` ->
                 `in`?.nextString()?.run {
-                    if (this.contains(Regex("[.eE]"))) this.toDouble() else this.toInt()
+                    if (this.contains("[.eE]".toRegex())) this.toDouble() else this.toInt()
                 }
             }
             .create()
