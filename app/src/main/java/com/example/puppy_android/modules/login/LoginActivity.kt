@@ -56,13 +56,10 @@ class LoginActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
         )
 
         lifecycleScope.launchWhenResumed {
-            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            launch {
                 // 按钮是否可点击
                 viewModel.loginEnableFlow.collect {
                     binding.loginButton.isEnabled = it
-                    binding.loginButton.background =
-                        AppCompatResources.getDrawable(this@LoginActivity, if (it) android.R.color.holo_orange_light else R.color.grey_border)
-                    binding.loginButton.setTextColor(resources.getColor(if (it) android.R.color.white else R.color.black_primary, null))
                 }
             }
 

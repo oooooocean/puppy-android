@@ -34,7 +34,7 @@ class LoginViewModel2 : ViewModel() {
 
     fun setInput(phone: Flow<String>, code: Flow<String>, protocol: Flow<Boolean>) {
         val phoneValidFlow = phone.map { it.length == 11 }
-        codeEnableFlow = phone.map { it.length == 11 }
+        codeEnableFlow = phoneValidFlow
             .combine(codeCounterFlow.map { it == DEFAULT_CODE_TIP }) { v1, v2 -> v1 and v2 }
             .distinctUntilChanged()
         loginEnableFlow = combine(phoneValidFlow, code.map { it.length == 6 }, protocol) { v1, v2, v3 ->
