@@ -29,17 +29,19 @@ import com.luck.picture.lib.PictureSelector
 import com.luck.picture.lib.config.PictureMimeType
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.listener.OnResultCallbackListener
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.io.File
 
-class UserEditActivity : AppCompatActivity() {
+class UserEditActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
     private lateinit var binding: ActivityUserEditBinding
     private lateinit var viewModel: UserEditViewModel
     private val picturePicker by lazy { PicturePicker(this) }
 
+    @OptIn(FlowPreview::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUserEditBinding.inflate(layoutInflater)
@@ -88,7 +90,18 @@ class UserEditActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
 
         binding.next.clickFlow
-            .onEach { }
+            .flatMapConcat {
+                showLoading(this)
+                viewModel.submitUserInfo()
+            }
+            .catch {
+                Toast.makeText(this@UserEditActivity, it.toString(), Toast.LENGTH_SHORT).show()
+                dismissLoading()
+            }
+            .onEach {
+                Toast.makeText(this, "提交成功", Toast.LENGTH_SHORT).show()
+                dismissLoading()
+            }
             .launchIn(lifecycleScope)
     }
 
@@ -98,8 +111,8 @@ class UserEditActivity : AppCompatActivity() {
     }
 
     private fun initViewModel(genderFlow: Flow<Gender>) {
-        val user = Gson().fromJson(intent.getStringExtra("user"), LoginUser::class.java)
-
+//        val user = Gson().fromJson(intent.getStringExtra("user"), LoginUser::class.java)
+        val user = LoginUser.cached!!
         val input = merge(
             binding.information.textFlow.onEach { viewModel.info.introduction = it },
             binding.nickname.textFlow.onEach { viewModel.info.nickname = it },
