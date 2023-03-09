@@ -62,7 +62,7 @@ class UserEditActivity : AppCompatActivity(), Loading by SimpleLoadingHelper() {
                 binding.next.isEnabled = it
                 binding.next.background =
                     AppCompatResources.getDrawable(this@UserEditActivity, if (it) android.R.color.holo_orange_light else R.color.grey_border)
-                binding.next.setTextColor(resources.getColor(if (it) android.R.color.white else R.color.black_primary, null))
+                binding.next.setTextColor(resources.getColor(if (it) android.R.color.white else R.color.grey_hint, null))
             }
             .launchIn(lifecycleScope)
 
